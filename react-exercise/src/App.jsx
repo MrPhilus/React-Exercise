@@ -3,16 +3,20 @@ import "./App.css";
 
 function App() {
   const [product, setProduct] = useState({});
-  const [inStock, setInStock] = useState(1);
+  const [inStock, setInStock] = useState(randomStock());
+
+  function randomStock() {
+    const minStock = 1;
+    const maxStock = 30;
+    return Math.floor(Math.random() * (maxStock - minStock + 1)) + minStock;
+  }
 
   function nextItem() {
-    setInStock((prevStock) => prevStock + 1);
-    console.log(prevStock);
+    setInStock(randomStock());
   }
 
   function prevItem() {
-    setInStock((prevStock) => prevStock - 1);
-    console.log(prevStock);
+    setInStock(randomStock());
   }
 
   const productList = () => {
@@ -45,8 +49,8 @@ function App() {
       </section>
       <input
         type="number"
-        onKeydown={(e) => {
-          setProduct(Number(e.target.value));
+        onInput={(e) => {
+          setInStock(Number(e.target.value));
         }}
       />
     </div>
